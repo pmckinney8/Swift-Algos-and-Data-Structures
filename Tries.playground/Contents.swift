@@ -73,7 +73,48 @@ class Trie {
         return false
     }
     
+    
+    
+    func delete(word: String) -> Bool {
+        
+        if !self.contains(word: word){
+            return false
+        }
+        
+        var current = self.root
+        var trailer = current
+        var trailerLetter = String(describing: word.characters.first)
+        
+        for i in word.characters.indices {
+            
+            let currentLetter = String(word[i])
+            
+            print("the current values \(currentLetter)")
+            current = current.links[currentLetter]!
+            
+            if current.endOfWord == true && current.links.count > 1{
+                trailer = current
+                trailerLetter = currentLetter
+            }
+            
+        }
+        
+        current.endOfWord = false
+        
+        if trailer.links.count == 1 {
+            trailer.endOfWord = false
+        }
+        
+        trailer.links.removeValue(forKey: trailerLetter)
+        
+        return false
+        
+    }
+    
+    
 }
+
+
 
 
 
