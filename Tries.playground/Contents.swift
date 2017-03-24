@@ -76,12 +76,5 @@ class Trie {
 }
 
 
-var trie = Trie()
-
-trie.addWord(word: "race")
-trie.addWord(word: "racecar")
-
-
-
 
 
