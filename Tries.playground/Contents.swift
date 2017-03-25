@@ -107,7 +107,7 @@ class Trie {
         
         trailer.links.removeValue(forKey: trailerLetter)
         
-        return false
+        return true
         
     }
     
