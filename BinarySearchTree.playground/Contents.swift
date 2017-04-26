@@ -12,18 +12,88 @@ class Node {
         self.value = val
     }
     
-    func viewInOrder(){
+    func traverse(){
         if self.left != nil {
-            self.left?.viewInOrder()
+            self.left?.traverse()
         }
         
         print(self.value)
         
         if self.right != nil {
-            self.right?.viewInOrder()
+            self.right?.traverse()
         }
     }
     
+    func size() -> Int {
+        var size = 1
+        
+        if let left = self.left {
+            size += left.size()
+        }
+        
+        if let right = self.right {
+            size += right.size()
+        }
+        
+        
+        return size
+    }
+    
+    func height() -> Int {
+        var leftHeight = 0
+        var rightHeight = 0
+        
+        
+        if let left = self.left {
+            leftHeight += left.height()
+        }
+        
+        if let right = self.right {
+            rightHeight += right.height()
+        }
+        
+        
+        if leftHeight >= rightHeight {
+            return leftHeight + 1
+        }else{
+            return rightHeight + 1
+        }
+        
+        
+    }
+    
+    func preOrder(){
+        
+        print("value \(self.value!)")
+        
+        if let left = self.left {
+            left.preOrder()
+        }
+        
+        if let right = self.right {
+            right.preOrder()
+        }
+        
+        
+    }
+    
+    func postOrder(){
+        
+        
+        
+        if let left = self.left {
+            left.postOrder()
+        }
+        
+        if let right = self.right {
+            right.postOrder()
+        }
+        
+        
+        print("value \(self.value!)")
+        
+        
+    }
     
 }
 
@@ -106,13 +176,74 @@ class BST {
         }
     }
     
-    func viewInOrder(){
+    func traverse(){
         if self.root != nil {
-            self.root?.viewInOrder()
+            self.root?.traverse()
         }
     }
     
+    func size() -> Int {
+        
+        if self.root == nil {
+            return 0
+        }
+        
+        return self.root!.size()
+    }
     
+    func height() -> Int {
+        if self.root == nil {
+            return 0
+        }
+        
+        return self.root!.height()
+    }
+    
+    func preOrder(){
+        
+        if let root = self.root {
+            root.preOrder()
+        }
+        
+    }
+    
+    func postOrder(){
+        
+        if let root = self.root {
+            root.postOrder()
+        }
+        
+    }
+    
+    func contains(val: Int) -> Bool {
+        
+        if let root = self.root {
+            
+            var current = root
+            
+            while(current != nil) {
+                
+                if current.value == val {
+                    return true
+                }
+                
+                if val > current.value && current.right != nil {
+                    current = current.right!
+                }else if val < current.value && current.left != nil {
+                    current = current.left!
+                }else{
+                    return false
+                }
+                
+                
+            }
+            
+            
+            
+        }
+        
+        return false
+    }
 }
 
 
@@ -123,8 +254,14 @@ bst.add(val: 34)
 bst.add(val: 20)
 bst.add(val: 28)
 bst.add(val: 40)
+bst.add(val: 10)
+bst.add(val: 9)
+bst.add(val: 8)
 
-bst.viewInOrder()
+bst.size()
+bst.postOrder()
+
+print(bst.contains(val: 300))
 
 
 
